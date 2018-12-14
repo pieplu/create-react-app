@@ -79,18 +79,18 @@ module.exports = {
     'no-labels': ['warn', { allowLoop: true, allowSwitch: false }],
     'no-lone-blocks': 'warn',
     'no-loop-func': 'warn',
-    'no-mixed-operators': [
-      'warn',
-      {
-        groups: [
-          ['&', '|', '^', '~', '<<', '>>', '>>>'],
-          ['==', '!=', '===', '!==', '>', '>=', '<', '<='],
-          ['&&', '||'],
-          ['in', 'instanceof'],
-        ],
-        allowSamePrecedence: false,
-      },
-    ],
+    // 'no-mixed-operators': [ // TODO use it
+    //   'warn',
+    //   {
+    //     groups: [
+    //       ['&', '|', '^', '~', '<<', '>>', '>>>'],
+    //       ['==', '!=', '===', '!==', '>', '>=', '<', '<='],
+    //       ['&&', '||'],
+    //       ['in', 'instanceof'],
+    //     ],
+    //     allowSamePrecedence: false,
+    //   },
+    // ],
     'no-multi-str': 'warn',
     'no-native-reassign': 'warn',
     'no-negated-in-lhs': 'warn',
