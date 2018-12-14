@@ -68,6 +68,18 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '')
 // injected into the application via DefinePlugin in Webpack configuration.
 const REACT_APP = /^REACT_APP_/i;
 
+// adapted java string hash function
+function javaStringHash(value) {
+  let hash = 0;
+  if (value.length > 0) {
+    for (let i = 0; i < value.length; i++) {
+      hash = 31 * hash + value.charCodeAt(i);
+      hash = hash & hash;
+    }
+  }
+  return hash;
+}
+
 function getClientEnvironment(publicUrl) {
   const buildTimestamp = new Date().toISOString();
   const buildTimestampHash = javaStringHash(buildTimestamp);
