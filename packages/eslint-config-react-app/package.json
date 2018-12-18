@@ -2,10 +2,10 @@
   "name": "eslint-config-react-app",
   "version": "3.0.5",
   "description": "ESLint configuration used by Create React App",
-  "repository": "pieplu/create-react-app",
+  "repository": "facebook/create-react-app",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pieplu/create-react-app/issues"
+    "url": "https://github.com/facebook/create-react-app/issues"
   },
   "files": [
     "index.js"

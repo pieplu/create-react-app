@@ -2,21 +2,31 @@ jobs:
   include:
   - stage: deploy release
     script:
-    - export TRAVIS_TAG=latest
+    - export TRAVIS_TAG=$(date +'%Y%m%d-%H%M%S')
     - cd packages
     - tar -czvf ../react-scripts.tar.gz react-scripts
     - tar -czvf ../eslint-config-react-app.tar.gz eslint-config-react-app
     - cd -
     - echo "Deploy Github release"
     deploy:
-      provider: releases
-      api_key:
-        secure: VGdZdTG+rTNf6S4i08VhbzjApZ9x1O407SART28pctpy39HQ1GlL/zJ/seuQYdWDZ/1BrX7/lZgo4NSKrr8xf2BmuBQKBeuUDFB9e5coz7gWHwRgHQGM8gCR0bjFkyn5vW2RbiXLlMntaYnezEuJMwH7y3GlZePinjxMxP8UYVt54G1nr6tf9cyPZE4inDlUII1IxvKIdada/uq4iT3RU3IM/xSz94LYxOI+YHpb9+8/UH6ZKabEZf0nzUWxK+2JtFHk2+4VcDiDgKfpO5KwuFz1zuaEpxhXEI2CPypfheFxO7hPoLQ/k9/mZkZ6vRw++MqOFG46GrWjUKelG9UrODKGVEFZHwk7ovPlEWQUBrtfPnxmhdkf6wd89sSIxI+8CdJLXraW1ns9H+6aPPEg7ieKoEmFZCCLB9c6IrZqz6ZvfB8ZP8a2JSwhT+nQQYUSfyMiSG7DoKhub0OOJK6P3tFzYlmJEK7iXHfXA7vJRw7Kn4tTa5t3Wog0dqsT0RQmgFegSAZNRmaSQzHVUwTEUvZISqy4/kTJwUcEonStmgT7AVL8+zrjqC3Iq/q5RQuiXK1dKbZlFx81xqSez1gdiizDIsDfJIuI46Dj39A5dpCGwIxsIEoU1OBIDCrO6LZXD+GB6Aoan5FJ64lrIz4P8l6tjGTDJzSRlMgIaXlCEYg=
-      skip_cleanup: true
-      overwrite: true
-      file: 
-        - react-scripts.tar.gz
-        - eslint-config-react-app.tar.gz
-      on:
-        repo: pieplu/create-react-app
-        branch: dist
+      - provider: releases
+        api_key:
+          secure: VGdZdTG+rTNf6S4i08VhbzjApZ9x1O407SART28pctpy39HQ1GlL/zJ/seuQYdWDZ/1BrX7/lZgo4NSKrr8xf2BmuBQKBeuUDFB9e5coz7gWHwRgHQGM8gCR0bjFkyn5vW2RbiXLlMntaYnezEuJMwH7y3GlZePinjxMxP8UYVt54G1nr6tf9cyPZE4inDlUII1IxvKIdada/uq4iT3RU3IM/xSz94LYxOI+YHpb9+8/UH6ZKabEZf0nzUWxK+2JtFHk2+4VcDiDgKfpO5KwuFz1zuaEpxhXEI2CPypfheFxO7hPoLQ/k9/mZkZ6vRw++MqOFG46GrWjUKelG9UrODKGVEFZHwk7ovPlEWQUBrtfPnxmhdkf6wd89sSIxI+8CdJLXraW1ns9H+6aPPEg7ieKoEmFZCCLB9c6IrZqz6ZvfB8ZP8a2JSwhT+nQQYUSfyMiSG7DoKhub0OOJK6P3tFzYlmJEK7iXHfXA7vJRw7Kn4tTa5t3Wog0dqsT0RQmgFegSAZNRmaSQzHVUwTEUvZISqy4/kTJwUcEonStmgT7AVL8+zrjqC3Iq/q5RQuiXK1dKbZlFx81xqSez1gdiizDIsDfJIuI46Dj39A5dpCGwIxsIEoU1OBIDCrO6LZXD+GB6Aoan5FJ64lrIz4P8l6tjGTDJzSRlMgIaXlCEYg=
+        skip_cleanup: true
+        overwrite: true
+        release-number: latest
+        file: 
+          - react-scripts.tar.gz
+        on:
+          repo: pieplu/create-react-app
+          branch: dist
+      - provider: releases
+        api_key:
+          secure: VGdZdTG+rTNf6S4i08VhbzjApZ9x1O407SART28pctpy39HQ1GlL/zJ/seuQYdWDZ/1BrX7/lZgo4NSKrr8xf2BmuBQKBeuUDFB9e5coz7gWHwRgHQGM8gCR0bjFkyn5vW2RbiXLlMntaYnezEuJMwH7y3GlZePinjxMxP8UYVt54G1nr6tf9cyPZE4inDlUII1IxvKIdada/uq4iT3RU3IM/xSz94LYxOI+YHpb9+8/UH6ZKabEZf0nzUWxK+2JtFHk2+4VcDiDgKfpO5KwuFz1zuaEpxhXEI2CPypfheFxO7hPoLQ/k9/mZkZ6vRw++MqOFG46GrWjUKelG9UrODKGVEFZHwk7ovPlEWQUBrtfPnxmhdkf6wd89sSIxI+8CdJLXraW1ns9H+6aPPEg7ieKoEmFZCCLB9c6IrZqz6ZvfB8ZP8a2JSwhT+nQQYUSfyMiSG7DoKhub0OOJK6P3tFzYlmJEK7iXHfXA7vJRw7Kn4tTa5t3Wog0dqsT0RQmgFegSAZNRmaSQzHVUwTEUvZISqy4/kTJwUcEonStmgT7AVL8+zrjqC3Iq/q5RQuiXK1dKbZlFx81xqSez1gdiizDIsDfJIuI46Dj39A5dpCGwIxsIEoU1OBIDCrO6LZXD+GB6Aoan5FJ64lrIz4P8l6tjGTDJzSRlMgIaXlCEYg=
+        skip_cleanup: true
+        overwrite: true
+        file: 
+          - react-scripts.tar.gz
+        on:
+          repo: pieplu/create-react-app
+          branch: dist
