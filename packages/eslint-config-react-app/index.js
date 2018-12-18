@@ -79,18 +79,18 @@ module.exports = {
     'no-labels': ['warn', { allowLoop: true, allowSwitch: false }],
     'no-lone-blocks': 'warn',
     'no-loop-func': 'warn',
-    // 'no-mixed-operators': [ // TODO use it
-    //   'warn',
-    //   {
-    //     groups: [
-    //       ['&', '|', '^', '~', '<<', '>>', '>>>'],
-    //       ['==', '!=', '===', '!==', '>', '>=', '<', '<='],
-    //       ['&&', '||'],
-    //       ['in', 'instanceof'],
-    //     ],
-    //     allowSamePrecedence: false,
-    //   },
-    // ],
+    'no-mixed-operators': [
+      'warn',
+      {
+        groups: [
+          ['&', '|', '^', '~', '<<', '>>', '>>>'],
+          ['==', '!=', '===', '!==', '>', '>=', '<', '<='],
+          ['&&', '||'],
+          ['in', 'instanceof'],
+        ],
+        allowSamePrecedence: false,
+      },
+    ],
     'no-multi-str': 'warn',
     'no-native-reassign': 'warn',
     'no-negated-in-lhs': 'warn',
@@ -213,12 +213,12 @@ module.exports = {
     'jsx-a11y/accessible-emoji': 'warn',
     'jsx-a11y/alt-text': 'warn',
     'jsx-a11y/anchor-has-content': 'warn',
-    // 'jsx-a11y/anchor-is-valid': [ // TODO use it
-    //   'warn',
-    //   {
-    //     aspects: ['noHref', 'invalidHref'],
-    //   },
-    // ],
+    'jsx-a11y/anchor-is-valid': [
+      'warn',
+      {
+        aspects: ['noHref', 'invalidHref'],
+      },
+    ],
     'jsx-a11y/aria-activedescendant-has-tabindex': 'warn',
     'jsx-a11y/aria-props': 'warn',
     'jsx-a11y/aria-proptypes': 'warn',
