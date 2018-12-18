@@ -26,6 +26,7 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
+const appConf = require('./appConf');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
@@ -274,11 +275,11 @@ module.exports = {
               // TODO: consider separate config for production,
               // e.g. to enable no-console and no-debugger only in production.
               baseConfig: {
-                extends: [require.resolve('eslint-config-react-app')],
+                extends: [require.resolve('eslint-config-react-app')].concat(paths.appEslintrc ? [paths.appEslintrc] : []),
                 settings: { react: { version: '999.999.999' } },
               },
               ignore: false,
-              useEslintrc: true,
+              useEslintrc: false,
               // @remove-on-eject-end
             },
             loader: require.resolve('eslint-loader'),
@@ -339,7 +340,7 @@ module.exports = {
                     },
                   },
                 ],
-              ],
+              ].concat(appConf.babelrc.plugins || []),
               cacheDirectory: true,
               // Save disk space when time isn't as important
               cacheCompression: true,
@@ -362,6 +363,7 @@ module.exports = {
                   { helpers: true },
                 ],
               ],
+              plugins: appConf.babelrc.plugins || [],
               cacheDirectory: true,
               // Save disk space when time isn't as important
               cacheCompression: true,
@@ -377,7 +379,7 @@ module.exports = {
               // because it was compiled. Thus, we don't want the browser
               // debugger to show the original code. Instead, the code
               // being evaluated would be much more helpful.
-              sourceMaps: false,
+              sourceMaps: false
             },
           },
           // "postcss" loader applies autoprefixer to our CSS.

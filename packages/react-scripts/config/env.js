@@ -101,9 +101,7 @@ function getClientEnvironment(publicUrl) {
         PUBLIC_URL: publicUrl,
         BUILD_TIMESTAMP: buildTimestamp,
         BUILD_TIMESTAMP_HASH: buildTimestampHash,
-        VERSION_HASH: 'prefix',
-        ROOT_LOGGER_LEVEL: process.env.NODE_ENV === 'production' ? 'ERROR' : null,
-        INACTIVITY_TIMEOUT: 2400000 // 2400000 === 40 minutes
+        ROOT_LOGGER_LEVEL: process.env.NODE_ENV === 'production' ? 'ERROR' : null
       }
     );
   // Stringify all values so we can feed into Webpack DefinePlugin

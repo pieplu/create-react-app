@@ -20,6 +20,7 @@ const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeM
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const getClientEnvironment = require('./env');
+const appConf = require('./appConf');
 const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
@@ -198,7 +199,7 @@ module.exports = {
               eslintPath: require.resolve('eslint'),
               // @remove-on-eject-begin
               baseConfig: {
-                extends: [require.resolve('eslint-config-react-app')],
+                extends: [require.resolve('eslint-config-react-app')].concat(paths.appEslintrc ? [paths.appEslintrc] : []),
                 settings: { react: { version: '999.999.999' } },
               },
               ignore: false,
@@ -263,7 +264,7 @@ module.exports = {
                     },
                   },
                 ],
-              ],
+              ].concat(appConf.babelrc.plugins || []),
               // This is a feature of `babel-loader` for webpack (not Babel itself).
               // It enables caching results in ./node_modules/.cache/babel-loader/
               // directory for faster rebuilds.
@@ -288,6 +289,7 @@ module.exports = {
                   { helpers: true },
                 ],
               ],
+              plugins: appConf.babelrc.plugins || [],
               cacheDirectory: true,
               // Don't waste time on Gzipping the cache
               cacheCompression: false,
