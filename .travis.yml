@@ -1,7 +1,7 @@
 jobs:
   include:
   - stage: deploy release
-    if: branch = dist
+    if: branch = "dist"
     script:
     - export TRAVIS_TAG=$(date +'%Y.%m.%d-%H%M')
     - cd packages
