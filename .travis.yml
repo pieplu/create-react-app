@@ -1,8 +1,9 @@
 jobs:
   include:
   - stage: deploy release
+    if: branch = dist
     script:
-    - export TRAVIS_TAG=$(date +'%Y%m%d-%H%M%S')
+    - export TRAVIS_TAG=$(date +'%Y.%m.%d-%H%M')
     - cd packages
     - tar --exclude="react-scripts/fixtures" -czvf ../react-scripts.tar.gz react-scripts
     - cd -

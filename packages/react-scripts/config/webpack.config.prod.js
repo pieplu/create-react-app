@@ -27,6 +27,7 @@ const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const appConf = require('./appConf');
+const createSassMap = require('./utils');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
@@ -107,6 +108,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
     loaders.push({
       loader: require.resolve(preProcessor),
       options: {
+        data: createSassMap(appConf.packageJson.sass),
         sourceMap: shouldUseSourceMap,
       },
     });
@@ -275,11 +277,11 @@ module.exports = {
               // TODO: consider separate config for production,
               // e.g. to enable no-console and no-debugger only in production.
               baseConfig: {
-                extends: [require.resolve('eslint-config-react-app')].concat(paths.appEslintrc ? [paths.appEslintrc] : []),
+                extends: [require.resolve('eslint-config-react-app')],
                 settings: { react: { version: '999.999.999' } },
               },
               ignore: false,
-              useEslintrc: false,
+              useEslintrc: true,
               // @remove-on-eject-end
             },
             loader: require.resolve('eslint-loader'),
@@ -314,7 +316,7 @@ module.exports = {
                 'babel-preset-react-app/webpack-overrides'
               ),
               // @remove-on-eject-begin
-              babelrc: false,
+              babelrc: true,
               configFile: false,
               presets: [require.resolve('babel-preset-react-app')],
               // Make sure we have a unique cache identifier, erring on the
@@ -340,7 +342,7 @@ module.exports = {
                     },
                   },
                 ],
-              ].concat(appConf.babelrc.plugins || []),
+              ],
               cacheDirectory: true,
               // Save disk space when time isn't as important
               cacheCompression: true,
@@ -354,7 +356,7 @@ module.exports = {
             exclude: /@babel(?:\/|\\{1,2})runtime/,
             loader: require.resolve('babel-loader'),
             options: {
-              babelrc: false,
+              babelrc: true,
               configFile: false,
               compact: false,
               presets: [
@@ -363,7 +365,6 @@ module.exports = {
                   { helpers: true },
                 ],
               ],
-              plugins: appConf.babelrc.plugins || [],
               cacheDirectory: true,
               // Save disk space when time isn't as important
               cacheCompression: true,
