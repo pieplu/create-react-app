@@ -26,6 +26,8 @@ const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
+const appConf = require('./appConf');
+const createSassMap = require('./utils');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
@@ -117,6 +119,7 @@ module.exports = function(webpackEnv) {
         loader: require.resolve(preProcessor),
         options: {
           sourceMap: isEnvProduction && shouldUseSourceMap,
+          data: createSassMap(appConf.packageJson.sass),
         },
       });
     }
@@ -317,7 +320,7 @@ module.exports = function(webpackEnv) {
                   settings: { react: { version: '999.999.999' } },
                 },
                 ignore: false,
-                useEslintrc: false,
+                useEslintrc: true,
                 // @remove-on-eject-end
               },
               loader: require.resolve('eslint-loader'),
@@ -352,7 +355,7 @@ module.exports = function(webpackEnv) {
                   'babel-preset-react-app/webpack-overrides'
                 ),
                 // @remove-on-eject-begin
-                babelrc: false,
+                babelrc: true,
                 configFile: false,
                 presets: [require.resolve('babel-preset-react-app')],
                 // Make sure we have a unique cache identifier, erring on the
@@ -400,7 +403,7 @@ module.exports = function(webpackEnv) {
               exclude: /@babel(?:\/|\\{1,2})runtime/,
               loader: require.resolve('babel-loader'),
               options: {
-                babelrc: false,
+                babelrc: true,
                 configFile: false,
                 compact: false,
                 presets: [
