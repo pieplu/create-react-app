@@ -25,7 +25,7 @@ Jest will look for test files with any of the following popular naming conventio
 
 The `.test.js` / `.spec.js` files (or the `__tests__` folders) can be located at any depth under the `src` top level folder.
 
-We recommend to put the test files (or `__tests__` folders) next to the code they are testing so that relative imports appear shorter. For example, if `App.test.js` and `App.js` are in the same folder, the test just needs to `import App from './App'` instead of a long relative path. Colocation also helps find tests more quickly in larger projects.
+We recommend to put the test files (or `__tests__` folders) next to the code they are testing so that relative imports appear shorter. For example, if `App.test.js` and `App.js` are in the same folder, the test just needs to `import App from './App'` instead of a long relative path. Collocation also helps find tests more quickly in larger projects.
 
 ## Command Line Interface
 
@@ -35,7 +35,7 @@ The watcher includes an interactive command-line interface with the ability to r
 
 ![Jest watch mode](https://jestjs.io/img/blog/15-watch.gif)
 
-> \*Although we recommend running your tests in watch mode during development, you can disable this behavior by passing in the `--no-watch` flag. In most CI environments, this is handled for you (see [On CI servers](#on-ci-servers)).
+> \*Although we recommend running your tests in watch mode during development, you can disable this behavior by passing in the `--watchAll=false` flag. In most CI environments, this is handled for you (see [On CI servers](#on-ci-servers)).
 
 ## Version Control Integration
 
@@ -180,13 +180,13 @@ As an alternative or companion to `enzyme`, you may consider using `react-testin
 To install `react-testing-library` and `jest-dom`, you can run:
 
 ```sh
-npm install --save react-testing-library jest-dom
+npm install --save @testing-library/react jest-dom
 ```
 
 Alternatively you may use `yarn`:
 
 ```sh
-yarn add react-testing-library jest-dom
+yarn add @testing-library/react jest-dom
 ```
 
 Similar to `enzyme` you can create a `src/setupTests.js` file to avoid boilerplate in your test files:
@@ -194,7 +194,7 @@ Similar to `enzyme` you can create a `src/setupTests.js` file to avoid boilerpla
 ```js
 // react-testing-library renders your components to document.body,
 // this will ensure they're removed after each test.
-import 'react-testing-library/cleanup-after-each';
+import '@testing-library/react/cleanup-after-each';
 // this adds jest-dom's custom assertions
 import 'jest-dom/extend-expect';
 ```
@@ -203,7 +203,7 @@ Here's an example of using `react-testing-library` and `jest-dom` for testing th
 
 ```js
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import App from './App';
 
 it('renders welcome message', () => {
@@ -212,7 +212,7 @@ it('renders welcome message', () => {
 });
 ```
 
-Learn more about the utilities provided by `react-testing-library` to facilitate testing asynchronous interactions as well as selecting form elements from [the `react-testing-library` documentation](https://github.com/kentcdodds/react-testing-library) and [examples](https://codesandbox.io/s/github/kentcdodds/react-testing-library-examples).
+Learn more about the utilities provided by `react-testing-library` to facilitate testing asynchronous interactions as well as selecting form elements from the [`react-testing-library` documentation](https://testing-library.com/react) and [examples](https://codesandbox.io/s/github/kentcdodds/react-testing-library-examples).
 
 ## Using Third Party Assertion Libraries
 
@@ -321,7 +321,7 @@ Popular CI servers already set the environment variable `CI` by default but you 
 1. Following the [Travis Getting started](https://docs.travis-ci.com/user/getting-started/) guide for syncing your GitHub repository with Travis. You may need to initialize some settings manually in your [profile](https://travis-ci.org/profile) page.
 1. Add a `.travis.yml` file to your git repository.
 
-```
+```yaml
 language: node_js
 node_js:
   - 8
@@ -366,17 +366,17 @@ set CI=true&&npm run build
 
 #### Linux, macOS (Bash)
 
-```bash
+```sh
 CI=true npm test
 ```
 
-```bash
+```sh
 CI=true npm run build
 ```
 
 The test command will force Jest to run in CI-mode, and tests will only run once instead of launching the watcher.
 
-For non-CI environments, you can simply pass the `--no-watch` flag to disable test-watching.
+For non-CI environments, you can simply pass the `--watchAll=false` flag to disable test-watching.
 
 The build command will check for linter warnings and fail if any are found.
 
