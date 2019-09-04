@@ -126,25 +126,19 @@ module.exports = function(webpackEnv) {
       },
     ].filter(Boolean);
     if (preProcessor) {
-<<<<<<< HEAD
-      loaders.push({
-        loader: require.resolve(preProcessor),
-        options: {
-          sourceMap: isEnvProduction && shouldUseSourceMap,
-          data: createSassMap(appConf.packageJson.sass),
-=======
       loaders.push(
         {
           loader: require.resolve('resolve-url-loader'),
           options: {
             sourceMap: isEnvProduction && shouldUseSourceMap,
+            
           },
->>>>>>> v3.1.1
         },
         {
           loader: require.resolve(preProcessor),
           options: {
             sourceMap: true,
+            data: createSassMap(appConf.packageJson.sass),
           },
         }
       );
