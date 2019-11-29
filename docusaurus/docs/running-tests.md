@@ -191,8 +191,6 @@ Similar to `enzyme` you can create a `src/setupTests.js` file to avoid boilerpla
 
 ```js
 // react-testing-library renders your components to document.body,
-// this will ensure they're removed after each test.
-import '@testing-library/react/cleanup-after-each';
 // this adds jest-dom's custom assertions
 import '@testing-library/jest-dom/extend-expect';
 ```
@@ -206,7 +204,7 @@ import App from './App';
 
 it('renders welcome message', () => {
   const { getByText } = render(<App />);
-  expect(getByText('Welcome to React')).toBeInTheDocument();
+  expect(getByText('Learn React')).toBeInTheDocument();
 });
 ```
 
@@ -277,7 +275,16 @@ Supported overrides:
 - [`collectCoverageFrom`](https://jestjs.io/docs/en/configuration.html#collectcoveragefrom-array)
 - [`coverageReporters`](https://jestjs.io/docs/en/configuration.html#coveragereporters-array-string)
 - [`coverageThreshold`](https://jestjs.io/docs/en/configuration.html#coveragethreshold-object)
+- [`extraGlobals`](https://jestjs.io/docs/en/configuration.html#extraglobals-array-string)
+- [`globalSetup`](https://jestjs.io/docs/en/configuration.html#globalsetup-string)
+- [`globalTeardown`](https://jestjs.io/docs/en/configuration.html#globalteardown-string)
+- [`moduleNameMapper`](https://jestjs.io/docs/en/configuration.html#modulenamemapper-object-string-string)
+- [`resetMocks`](https://jestjs.io/docs/en/configuration.html#resetmocks-boolean)
+- [`resetModules`](https://jestjs.io/docs/en/configuration.html#resetmodules-boolean)
 - [`snapshotSerializers`](https://jestjs.io/docs/en/configuration.html#snapshotserializers-array-string)
+- [`transform`](https://jestjs.io/docs/en/configuration.html#transform-object-string-pathtotransformer-pathtotransformer-object)
+- [`transformIgnorePatterns`](https://jestjs.io/docs/en/configuration.html#transformignorepatterns-array-string)
+- [`watchPathIgnorePatterns`](https://jestjs.io/docs/en/configuration.html#watchpathignorepatterns-array-string)
 
 Example package.json:
 
